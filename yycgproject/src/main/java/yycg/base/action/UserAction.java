@@ -82,7 +82,9 @@ public class UserAction {
 		return "/base/user/addsysuser";
 	}
 	
-	
+	public void test() {
+		
+	}
 	
 	
 	
