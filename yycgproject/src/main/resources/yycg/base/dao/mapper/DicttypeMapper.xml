@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yycg.base.dao.mapper.DicttypeMapper">
+  <resultMap id="BaseResultMap" type="yycg.base.pojo.po.Dicttype">
+    <id column="typecode" jdbcType="VARCHAR" property="typecode" />
+    <result column="typename" jdbcType="VARCHAR" property="typename" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="typesort" jdbcType="INTEGER" property="typesort" />
+    <result column="codelength" jdbcType="VARCHAR" property="codelength" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    typecode, typename, remark, typesort, codelength
+  </sql>
+  <select id="selectByExample" parameterType="yycg.base.pojo.po.DicttypeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DICTTYPE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DICTTYPE
+    where typecode = #{typecode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DICTTYPE
+    where typecode = #{typecode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="yycg.base.pojo.po.DicttypeExample">
+    delete from DICTTYPE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="yycg.base.pojo.po.Dicttype">
+    insert into DICTTYPE (typecode, typename, remark, 
+      typesort, codelength)
+    values (#{typecode,jdbcType=VARCHAR}, #{typename,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{typesort,jdbcType=INTEGER}, #{codelength,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="yycg.base.pojo.po.Dicttype">
+    insert into DICTTYPE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="typecode != null">
+        typecode,
+      </if>
+      <if test="typename != null">
+        typename,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="typesort != null">
+        typesort,
+      </if>
+      <if test="codelength != null">
+        codelength,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="typecode != null">
+        #{typecode,jdbcType=VARCHAR},
+      </if>
+      <if test="typename != null">
+        #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="typesort != null">
+        #{typesort,jdbcType=INTEGER},
+      </if>
+      <if test="codelength != null">
+        #{codelength,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="yycg.base.pojo.po.DicttypeExample" resultType="java.lang.Long">
+    select count(*) from DICTTYPE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update DICTTYPE
+    <set>
+      <if test="record.typecode != null">
+        typecode = #{record.typecode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typename != null">
+        typename = #{record.typename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typesort != null">
+        typesort = #{record.typesort,jdbcType=INTEGER},
+      </if>
+      <if test="record.codelength != null">
+        codelength = #{record.codelength,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update DICTTYPE
+    set typecode = #{record.typecode,jdbcType=VARCHAR},
+      typename = #{record.typename,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      typesort = #{record.typesort,jdbcType=INTEGER},
+      codelength = #{record.codelength,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="yycg.base.pojo.po.Dicttype">
+    update DICTTYPE
+    <set>
+      <if test="typename != null">
+        typename = #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="typesort != null">
+        typesort = #{typesort,jdbcType=INTEGER},
+      </if>
+      <if test="codelength != null">
+        codelength = #{codelength,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where typecode = #{typecode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="yycg.base.pojo.po.Dicttype">
+    update DICTTYPE
+    set typename = #{typename,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      typesort = #{typesort,jdbcType=INTEGER},
+      codelength = #{codelength,jdbcType=VARCHAR}
+    where typecode = #{typecode,jdbcType=VARCHAR}
+  </update>
+</mapper>

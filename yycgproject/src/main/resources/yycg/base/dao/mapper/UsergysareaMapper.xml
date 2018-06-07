@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yycg.base.dao.mapper.UsergysareaMapper">
+  <resultMap id="BaseResultMap" type="yycg.base.pojo.po.Usergysarea">
+    <id column="usergysid" jdbcType="VARCHAR" property="usergysid" />
+    <id column="areaid" jdbcType="VARCHAR" property="areaid" />
+    <result column="vchar1" jdbcType="VARCHAR" property="vchar1" />
+    <result column="vchar2" jdbcType="VARCHAR" property="vchar2" />
+    <result column="vchar3" jdbcType="VARCHAR" property="vchar3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    usergysid, areaid, vchar1, vchar2, vchar3
+  </sql>
+  <select id="selectByExample" parameterType="yycg.base.pojo.po.UsergysareaExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from USERGYSAREA
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="yycg.base.pojo.po.UsergysareaKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from USERGYSAREA
+    where usergysid = #{usergysid,jdbcType=VARCHAR}
+      and areaid = #{areaid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="yycg.base.pojo.po.UsergysareaKey">
+    delete from USERGYSAREA
+    where usergysid = #{usergysid,jdbcType=VARCHAR}
+      and areaid = #{areaid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="yycg.base.pojo.po.UsergysareaExample">
+    delete from USERGYSAREA
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="yycg.base.pojo.po.Usergysarea">
+    insert into USERGYSAREA (usergysid, areaid, vchar1, 
+      vchar2, vchar3)
+    values (#{usergysid,jdbcType=VARCHAR}, #{areaid,jdbcType=VARCHAR}, #{vchar1,jdbcType=VARCHAR}, 
+      #{vchar2,jdbcType=VARCHAR}, #{vchar3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="yycg.base.pojo.po.Usergysarea">
+    insert into USERGYSAREA
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="usergysid != null">
+        usergysid,
+      </if>
+      <if test="areaid != null">
+        areaid,
+      </if>
+      <if test="vchar1 != null">
+        vchar1,
+      </if>
+      <if test="vchar2 != null">
+        vchar2,
+      </if>
+      <if test="vchar3 != null">
+        vchar3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="usergysid != null">
+        #{usergysid,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null">
+        #{areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="vchar1 != null">
+        #{vchar1,jdbcType=VARCHAR},
+      </if>
+      <if test="vchar2 != null">
+        #{vchar2,jdbcType=VARCHAR},
+      </if>
+      <if test="vchar3 != null">
+        #{vchar3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="yycg.base.pojo.po.UsergysareaExample" resultType="java.lang.Long">
+    select count(*) from USERGYSAREA
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update USERGYSAREA
+    <set>
+      <if test="record.usergysid != null">
+        usergysid = #{record.usergysid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaid != null">
+        areaid = #{record.areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vchar1 != null">
+        vchar1 = #{record.vchar1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vchar2 != null">
+        vchar2 = #{record.vchar2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vchar3 != null">
+        vchar3 = #{record.vchar3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update USERGYSAREA
+    set usergysid = #{record.usergysid,jdbcType=VARCHAR},
+      areaid = #{record.areaid,jdbcType=VARCHAR},
+      vchar1 = #{record.vchar1,jdbcType=VARCHAR},
+      vchar2 = #{record.vchar2,jdbcType=VARCHAR},
+      vchar3 = #{record.vchar3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="yycg.base.pojo.po.Usergysarea">
+    update USERGYSAREA
+    <set>
+      <if test="vchar1 != null">
+        vchar1 = #{vchar1,jdbcType=VARCHAR},
+      </if>
+      <if test="vchar2 != null">
+        vchar2 = #{vchar2,jdbcType=VARCHAR},
+      </if>
+      <if test="vchar3 != null">
+        vchar3 = #{vchar3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where usergysid = #{usergysid,jdbcType=VARCHAR}
+      and areaid = #{areaid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="yycg.base.pojo.po.Usergysarea">
+    update USERGYSAREA
+    set vchar1 = #{vchar1,jdbcType=VARCHAR},
+      vchar2 = #{vchar2,jdbcType=VARCHAR},
+      vchar3 = #{vchar3,jdbcType=VARCHAR}
+    where usergysid = #{usergysid,jdbcType=VARCHAR}
+      and areaid = #{areaid,jdbcType=VARCHAR}
+  </update>
+</mapper>
