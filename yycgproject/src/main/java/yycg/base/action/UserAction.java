@@ -14,7 +14,7 @@ import yycg.base.pojo.vo.SysuserQueryVo;
 import yycg.base.process.result.DataGridResultInfo;
 
 import yycg.base.process.result.ResultInfo;
-
+import yycg.base.process.result.SubmitResultInfo;
 import yycg.base.service.UserService;
 
 
@@ -82,8 +82,18 @@ public class UserAction {
 		return "/base/user/addsysuser";
 	}
 	
-	public void test() {
+	@RequestMapping("/addsysusersubmit")
+	public @ResponseBody SubmitResultInfo addsysusersubmit(SysuserQueryVo sysuserQueryVo) throws Exception{
 		
+		ResultInfo resultInfo = new ResultInfo();
+		resultInfo.setType(ResultInfo.TYPE_RESULT_SUCCESS);
+		resultInfo.setMessage("操作成功！");
+		
+		userService.insertSysuser(sysuserQueryVo.getSysuserCustom());
+		
+		SubmitResultInfo submitResultInfo = new SubmitResultInfo(resultInfo);
+		
+		return submitResultInfo;
 	}
 
 }

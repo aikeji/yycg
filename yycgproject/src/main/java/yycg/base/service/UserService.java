@@ -20,4 +20,7 @@ public interface UserService {
 	// 根据条件查询列表的总数
 	public int findSysuserCount(SysuserQueryVo sysuserQueryVo) throws Exception;
 	
+	
+	public void insertSysuser(SysuserCustom sysuserCustom) throws Exception;
+	
 }

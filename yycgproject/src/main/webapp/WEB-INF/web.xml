@@ -39,10 +39,10 @@
 			<param-value>classpath:spring/springmvc.xml</param-value>
 		</init-param>
 		<!-- 屏蔽springmvc自动注册的异常处理器 -->
-		<!-- <init-param>
+		<init-param>
 			<param-name>detectAllHandlerExceptionResolvers</param-name>
 			<param-value>false</param-value>
-		</init-param> -->
+		</init-param>
 
 		<!-- <load-on-startup>1</load-on-startup> -->
 	</servlet>

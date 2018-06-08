@@ -34,11 +34,11 @@
 	</bean>
      
 	<!-- 统一异常处理类 -->
-	<!-- <bean id="handlerExceptionResolver"
+	<bean id="handlerExceptionResolver"
 		class="yycg.base.process.exception.ExceptionResolverCustom">
-		注入一个json转换器
+		<!-- 注入一个json转换器 -->
 		<property name="jsonMessageConverter" ref="jsonMessageConverter" />
-	</bean> -->
+	</bean>
 	
 
 
