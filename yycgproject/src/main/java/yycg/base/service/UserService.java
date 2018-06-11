@@ -21,6 +21,14 @@ public interface UserService {
 	public int findSysuserCount(SysuserQueryVo sysuserQueryVo) throws Exception;
 	
 	
+	public Userjd findUserjdByMc(String symc) throws Exception;
+	
+	public Useryy findUseryyByMc(String symc) throws Exception;
+	
+	public Usergys findUsergysByMc(String symc) throws Exception;
+	
 	public void insertSysuser(SysuserCustom sysuserCustom) throws Exception;
+	
+	public void deleteSyster(String id) throws Exception;
 	
 }

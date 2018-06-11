@@ -156,5 +156,20 @@ public class UserServiceImpl implements UserService {
 		sysuserMapper.insert(sysuserCustom);
 	}
 
+	@Override
+	public void deleteSyster(String id) throws Exception {
+		// TODO Auto-generated method stub
+		
+		Sysuser sysuser = sysuserMapper.selectByPrimaryKey(id);
+		
+		if (sysuser == null) {
+			ResultUtil.throwExcepion(ResultUtil.createFail(Config.MESSAGE, 212, null));
+		}
+		
+		sysuserMapper.deleteByPrimaryKey(id);
+		
+	}
+	
+	
 	
 }

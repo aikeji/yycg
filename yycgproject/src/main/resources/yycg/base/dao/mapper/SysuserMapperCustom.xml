@@ -38,8 +38,8 @@
 		<where>
 			<include refid="query_sysuser_where" />
 		</where>
+		 ORDER BY userid ASC
 		 limit #{pageQuery.PageQuery_start},#{pageQuery.PageQuery_pageSize}
-				
 	</select>
 	
 	<!-- 查询列表的总记录数 -->

@@ -14,7 +14,7 @@
 
 <script type="text/javascript">
 	//datagrid列定义
-	var columns_v = [ [ {
+	var columns_v = [ [{
 		field : 'userid',//对应json中的key
 		title : '账号',
 		width : 120
@@ -55,7 +55,14 @@
 				return "暂停";
 			}
 		}
-	} ] ];
+	},{
+		field : 'opt1',
+		title : '删除',
+		width : 120,
+		formatter : function(value, row, index) {
+			return "<a href=javascript:deleteuser('"+row.id+"')>删除</a>";
+		}
+	}] ];
 
 	//定义 datagird工具
 	var toolbar_v = [ {//工具栏
@@ -93,6 +100,33 @@
 		//将form表单数据提取出来，组成一个json
 		var formdata = $("#sysuserqueryForm").serializeJson();
 		$('#sysuserlist').datagrid('load',formdata);
+	}
+	function deleteuser(id){
+		//第一个参数是提示信息，第二个参数，取消执行的函数指针，第三个参是，确定执行的函数指针
+		_confirm('您确认删除吗？',null,function (){
+
+			//将要删除的id赋值给deleteid，deleteid在sysuserdeleteform中
+			$("#delete_id").val(id);
+			//使用ajax的from提交执行删除
+			//sysuserdeleteform：form的id，userdel_callback：删除回调函数，
+			//第三个参数是url的参数
+			//第四个参数是datatype，表示服务器返回的类型
+			jquerySubByFId('sysuserdeleteform',userdel_callback,null,"json");
+			
+			
+		});
+	}
+	function userdel_callback(data){
+		message_alert(data);
+		//刷新 页面
+		//在提交成功后重新加载 datagrid
+		//取出提交结果
+		var type=data.resultInfo.type;
+		if(type==1){
+			//成功结果
+			//重新加载 datagrid
+			queryuser();
+		}
 	}
 </script>
 
@@ -140,6 +174,9 @@
 			</TR>
 		</TBODY>
 	</TABLE>
+</form>
+<form id="sysuserdeleteform" action="${baseurl }user/deleteSysuser.action" method="post">
+	<input type="hidden" id="delete_id" name="id"/>
 </form>
 </body>
 </html>

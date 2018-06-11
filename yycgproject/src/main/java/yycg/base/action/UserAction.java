@@ -99,4 +99,13 @@ public class UserAction {
 		return ResultUtil.createSubmitResult(ResultUtil.createSuccess(Config.MESSAGE, 906, null));
 	}
 
+	
+	@RequestMapping("/deleteSysuser")
+	public @ResponseBody SubmitResultInfo deletesysuser(String id) throws Exception{
+		
+		userService.deleteSyster(id);
+		
+		return ResultUtil.createSubmitResult(ResultUtil.createSuccess(Config.MESSAGE, 906, null));
+	}
+	
 }
