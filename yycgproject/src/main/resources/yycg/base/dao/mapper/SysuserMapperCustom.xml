@@ -55,7 +55,9 @@
 		when'4' then(select mc from usergys where id = sysuser.sysid) 
 		ELSE NULL END sysmc from sysuser 
 	)sysuser 
-	
+	<where>
+		<include refid="query_sysuser_where" />
+	</where>
 	
 	</select>
 

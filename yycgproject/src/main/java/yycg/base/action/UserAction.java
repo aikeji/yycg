@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import yycg.base.pojo.vo.PageQuery;
 import yycg.base.pojo.vo.SysuserCustom;
 import yycg.base.pojo.vo.SysuserQueryVo;
+import yycg.base.process.context.Config;
 import yycg.base.process.result.DataGridResultInfo;
 
 import yycg.base.process.result.ResultInfo;
+import yycg.base.process.result.ResultUtil;
 import yycg.base.process.result.SubmitResultInfo;
 import yycg.base.service.UserService;
 
@@ -39,6 +41,7 @@ public class UserAction {
 	@RequestMapping("/queryuser")
 	public String queryuser(Model model)throws Exception{
 		//将页面所需要的数据取出，传到页面
+		
 		return "/base/user/queryuser";
 	}
 	
@@ -84,15 +87,16 @@ public class UserAction {
 	@RequestMapping("/addsysusersubmit")
 	public @ResponseBody SubmitResultInfo addsysusersubmit(SysuserQueryVo sysuserQueryVo) throws Exception{
 		
-		ResultInfo resultInfo = new ResultInfo();
-		resultInfo.setType(ResultInfo.TYPE_RESULT_SUCCESS);
-		resultInfo.setMessage("操作成功！");
+//		ResultInfo resultInfo = new ResultInfo();
+//		resultInfo.setType(ResultInfo.TYPE_RESULT_SUCCESS);
+//		resultInfo.setMessage("操作成功！");
 		
 		userService.insertSysuser(sysuserQueryVo.getSysuserCustom());
 		
-		SubmitResultInfo submitResultInfo = new SubmitResultInfo(resultInfo);
+//		SubmitResultInfo submitResultInfo = new SubmitResultInfo(resultInfo);
 		
-		return submitResultInfo;
+//		return submitResultInfo;
+		return ResultUtil.createSubmitResult(ResultUtil.createSuccess(Config.MESSAGE, 906, null));
 	}
 
 }

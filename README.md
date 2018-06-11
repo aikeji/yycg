@@ -11,6 +11,3 @@
 		<bootclasspath>${MY_HOME}/lib/rt.jar;${MY_HOME}/lib/jce.jar</bootclasspath>
 	</compilerArguments>
 
-
-2.yycgproject.pom
-	mysql version改为5.0.5

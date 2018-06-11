@@ -21,8 +21,10 @@ import yycg.base.pojo.po.Useryy;
 import yycg.base.pojo.po.UseryyExample;
 import yycg.base.pojo.vo.SysuserCustom;
 import yycg.base.pojo.vo.SysuserQueryVo;
+import yycg.base.process.context.Config;
 import yycg.base.process.result.ExceptionResultInfo;
 import yycg.base.process.result.ResultInfo;
+import yycg.base.process.result.ResultUtil;
 import yycg.base.service.UserService;
 import yycg.util.UUIDBuild;
 
@@ -116,10 +118,11 @@ public class UserServiceImpl implements UserService {
 		
 		Sysuser sysuser = this.findSysuserByUserid(sysuserCustom.getUserid());
 		if (sysuser != null) {
-			ResultInfo resultInfo = new ResultInfo();
-			resultInfo.setType(ResultInfo.TYPE_RESULT_FAIL);
-			resultInfo.setMessage("账号重复");
-			throw new ExceptionResultInfo(resultInfo);
+//			ResultInfo resultInfo = new ResultInfo();
+//			resultInfo.setType(ResultInfo.TYPE_RESULT_FAIL);
+//			resultInfo.setMessage("账号重复");
+//			throw new ExceptionResultInfo(resultInfo);
+			ResultUtil.throwExcepion(ResultUtil.createInfo(Config.MESSAGE, 213, null));
 		}
 		
 		String groupId = sysuserCustom.getGroupid();
