@@ -1,16 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<!-- 父模块的相对路径， 父模块目录 中要有pom.xml -->
+	<!-- <parent>
+		父模块的相对路径， 父模块目录 中要有pom.xml
 		<relativePath>../yycgparent</relativePath>
 		<groupId>yycg</groupId>
 		<artifactId>yycgparent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-	</parent>
-	<!-- <groupId>yycg</groupId> -->
+	</parent> -->
+	<groupId>yycg</groupId>
 	<artifactId>springmybatis</artifactId>
-	<!-- <version>0.0.1-SNAPSHOT</version> -->
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>springmybatis</name>
