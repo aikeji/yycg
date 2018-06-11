@@ -151,8 +151,6 @@ public class UserServiceImpl implements UserService {
 		System.out.println(sysuserCustom.toString());
 		
 		sysuserMapper.insert(sysuserCustom);
-		
-		
 	}
 
 	

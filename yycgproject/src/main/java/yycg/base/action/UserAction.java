@@ -39,7 +39,6 @@ public class UserAction {
 	@RequestMapping("/queryuser")
 	public String queryuser(Model model)throws Exception{
 		//将页面所需要的数据取出，传到页面
-
 		return "/base/user/queryuser";
 	}
 	
