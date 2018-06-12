@@ -2,7 +2,7 @@ package yycg.base.service.impl;
 
 import java.util.List;
 
-
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import yycg.base.dao.mapper.SysuserMapper;
@@ -26,6 +26,7 @@ import yycg.base.process.result.ExceptionResultInfo;
 import yycg.base.process.result.ResultInfo;
 import yycg.base.process.result.ResultUtil;
 import yycg.base.service.UserService;
+import yycg.util.MD5;
 import yycg.util.UUIDBuild;
 
 public class UserServiceImpl implements UserService {
@@ -170,6 +171,100 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
+	@Override
+	public void updateSysuser(String id, SysuserCustom sysuserCustom) throws Exception {
+		// TODO Auto-generated method stub
+		
+		String userid_page = sysuserCustom.getUserid();
+		
+		Sysuser sysuser = sysuserMapper.selectByPrimaryKey(id);
+		if (sysuser == null) {
+			
+		}
+		
+		String userid = sysuser.getUserid();
+		if (!userid_page.equals(userid)) {
+			Sysuser sysuser_1 = this.findSysuserByUserid(userid_page);
+			if (sysuser_1 != null) {
+				ResultUtil.throwExcepion(ResultUtil.createFail(Config.MESSAGE, 213, null));
+			}
+		}
+		
+		String groupId = sysuserCustom.getGroupid();
+		String symc = sysuserCustom.getSysmc();
+		String sysId = null;
+		if (groupId.equals("1") || groupId.equals("2")) {
+			Userjd userjd = this.findUserjdByMc(symc);
+			if (userjd == null) {
+				ResultUtil.throwExcepion(ResultUtil.createFail(Config.MESSAGE, 217, null));
+			}
+			sysId = userjd.getId();
+		}else if (groupId.equals("3")) {
+			Useryy useryy = this.findUseryyByMc(symc);
+			if (useryy == null) {
+				ResultUtil.throwExcepion(ResultUtil.createFail(Config.MESSAGE, 217, null));
+			}
+			sysId = useryy.getId();
+		}else if (groupId.equals("4")) {
+			Usergys usergys = this.findUsergysByMc(symc);
+			if (usergys == null) {
+				ResultUtil.throwExcepion(ResultUtil.createFail(Config.MESSAGE, 217, null));
+			}
+			sysId = usergys.getId();
+		}
+		
+		String pwd = sysuser.getPwd();
+		String pwd_md5 = null;
+		if (pwd != null && !pwd.equals("")) {
+			pwd_md5 = new MD5().getMD5ofStr(pwd);
+		}
+		
+		Sysuser sysuser_update = sysuserMapper.selectByPrimaryKey(id);
+		sysuser_update.setUserid(sysuserCustom.getUserid());
+		sysuser_update.setUsername(sysuserCustom.getUsername());
+		sysuser_update.setUserstate(sysuserCustom.getUserstate());
+		if(pwd_md5!=null){
+			sysuser_update.setPwd(pwd_md5);
+		}
+		sysuser_update.setGroupid(sysuserCustom.getGroupid());
+		sysuser_update.setSysid(sysId);//单位id
+		sysuserMapper.updateByPrimaryKey(sysuser_update);
+		
+	}
 	
+	@Override
+	public SysuserCustom findSysuserById(String id) throws Exception {
+		// TODO Auto-generated method stub
+		
+		Sysuser sysuser = sysuserMapper.selectByPrimaryKey(id);
+		String groupId = sysuser.getGroupid();
+		String symc = null;
+		String sysId = sysuser.getSysid();
+		if (groupId.equals("1") || groupId.equals("2")) {
+			Userjd userjd = userjdMapper.selectByPrimaryKey(sysId);
+			if (userjd == null) {
+				ResultUtil.throwExcepion(ResultUtil.createFail(Config.MESSAGE, 217, null));
+			}
+			symc = userjd.getMc();
+		}else if (groupId.equals("3")) {
+			Useryy useryy = useryyMapper.selectByPrimaryKey(sysId);
+			if (useryy == null) {
+				ResultUtil.throwExcepion(ResultUtil.createFail(Config.MESSAGE, 217, null));
+			}
+			symc = useryy.getMc();
+		}else if (groupId.equals("4")) {
+			Usergys usergys = usergysMapper.selectByPrimaryKey(sysId);
+			if (usergys == null) {
+				ResultUtil.throwExcepion(ResultUtil.createFail(Config.MESSAGE, 217, null));
+			}
+			symc = usergys.getMc();
+		}
+		
+		SysuserCustom sysuserCustom = new SysuserCustom();
+		BeanUtils.copyProperties(sysuser, sysuserCustom);
+		sysuserCustom.setSysmc(symc);
+
+		return sysuserCustom;
+	}
 	
 }

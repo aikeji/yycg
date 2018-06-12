@@ -62,6 +62,13 @@
 		formatter : function(value, row, index) {
 			return "<a href=javascript:deleteuser('"+row.id+"')>删除</a>";
 		}
+	},{
+		field : 'opt2',
+		title : '修改',
+		width : 120,
+		formatter : function(value, row, index) {
+			return "<a href=javascript:edituser('"+row.id+"')>修改</a>";
+		}
 	}] ];
 
 	//定义 datagird工具
@@ -127,6 +134,12 @@
 			//重新加载 datagrid
 			queryuser();
 		}
+	}
+	//修改用户
+	function edituser(id){
+		
+		//打开修改窗口
+		createmodalwindow("修改用户信息", 800, 250, '${baseurl}user/editsysuser.action?id='+id);
 	}
 </script>
 

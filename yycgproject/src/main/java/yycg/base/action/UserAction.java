@@ -108,4 +108,24 @@ public class UserAction {
 		return ResultUtil.createSubmitResult(ResultUtil.createSuccess(Config.MESSAGE, 906, null));
 	}
 	
+	@RequestMapping("/editsysuser")
+	public String editsysuser(Model model,String id) throws Exception{
+		
+		SysuserCustom sysuserCustom = userService.findSysuserById(id);
+		
+		model.addAttribute("sysuserCustom", sysuserCustom);
+		
+		return "/base/user/editsysuser";
+	}
+	
+	@RequestMapping("/editsysusersubmit")
+	public @ResponseBody SubmitResultInfo editsysusersubmit(String id,SysuserQueryVo sysuserQueryVo) throws Exception{
+		
+		
+		userService.updateSysuser(id, sysuserQueryVo.getSysuserCustom());
+		
+		return ResultUtil.createSubmitResult(ResultUtil.createSuccess(Config.MESSAGE, 906, null));
+	}
+	
+	
 }

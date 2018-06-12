@@ -31,4 +31,7 @@ public interface UserService {
 	
 	public void deleteSyster(String id) throws Exception;
 	
+	public void updateSysuser(String id,SysuserCustom sysuserCustom) throws Exception;
+	
+	public SysuserCustom findSysuserById(String id) throws Exception;
 }
