@@ -15,6 +15,16 @@ public class SysuserCustom extends Sysuser {
 	
 	//单位名称 
 	private String sysmc;
+	
+	private String groupname;
+
+	public String getGroupname() {
+		return groupname;
+	}
+
+	public void setGroupname(String groupname) {
+		this.groupname = groupname;
+	}
 
 	public String getSysmc() {
 		return sysmc;

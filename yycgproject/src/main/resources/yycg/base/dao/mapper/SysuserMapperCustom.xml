@@ -27,7 +27,9 @@
 		resultType="yycg.base.pojo.vo.SysuserCustom">
 		
 		select * from ( 
-			select sysuser.id,sysuser.userid,sysuser.username,SYSUSER.groupid,SYSUSER.sysid,sysuser.userstate,
+			select sysuser.id,sysuser.userid,sysuser.username,sysuser.groupid,
+			(select info from DICTINFO d where d.dictcode=sysuser.groupid and typecode='s01')groupname,
+			SYSUSER.sysid,sysuser.userstate,
 			case SYSUSER.groupid 
 			when'1' then(SELECT mc from userjd where id=SYSUSER.sysid) 
 			when'2' then(select mc from userjd where id = sysuser.sysid) 

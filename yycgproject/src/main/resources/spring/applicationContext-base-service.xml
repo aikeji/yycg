@@ -16,4 +16,5 @@
 <!-- 用户管理 -->
 <bean id="userService" class="yycg.base.service.impl.UserServiceImpl"/>
 
+<bean id="sysConfigService" class="yycg.base.service.impl.SysConfigServiceImpl"/>
 </beans>
